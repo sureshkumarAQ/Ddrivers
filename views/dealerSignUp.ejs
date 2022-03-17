@@ -1,0 +1,80 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dealer Sign Up</title>
+</head>
+<br>
+    <h1>Create a new Account as a Dealer</h1>
+
+    <form action="/dealer/signUp" method="POST" >
+        <div class="new_user">
+            <div class="form-group">
+                <label for="name" class="text-light">Name</label>
+                <input type="hidden" name="id" value="">
+                <input type="text" name="name" value="" placeholder="Mark Stoenis">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="Email" class="text-light">Email</label>
+                <input type="text" name="email" value="" placeholder="example@gmail.com">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="Possword" class="text-light">Password</label>
+                <input type="password" name="password" value="" placeholder="Enter a secure password">
+            </div>
+            
+            <br/>
+
+            <div class="form-group">
+                <label for="Number" class="text-light">Mobile Number</label>
+                <input type="text" name="number" value="" placeholder="9999999999">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="Material" class="text-light">Nature of Material</label>
+                <input type="text" name="material" value="" placeholder="Material type">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="weight" class="text-light">Weight of Material</label>
+                <input type="text" name="weight" value="" placeholder="100kg">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="Quantity" class="text-light">Quantity</label>
+                <input type="text" name="quantity" value="" placeholder="20">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="City" class="text-light">City</label>
+                <input type="text" name="city" value="" placeholder="Jaipur">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="State" class="text-light">State</label>
+                <input type="text" name="state" value="" placeholder="Rajasthan">
+            </div>
+            <br/>
+    
+            <div class="form-group">
+                <button type="submit" class="btn text-dark update">Save</button>
+            </div>
+    
+        </div>
+    </form>
+
+</br>
+</br>
+    <a href="/dealer/login" >
+        Login 
+    </a>
+
+</body>
+</html>

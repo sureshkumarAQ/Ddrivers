@@ -1,0 +1,37 @@
+<!-- include header -->
+<%-include('partials/_header.ejs')%>
+<!-- /include header -->
+
+<!-- Main Site -->
+
+<main id="site-main">
+    <div class="container">
+        <form action="/" method="POST">
+            <table class="table">
+                <thead class="thead-dark">
+                    <tr>
+                        
+                        <th>Name</th>
+                        <th>@Email</th>
+                        <th>Number</th>
+                        <th>Tname</th>
+                        <th>Age</th>
+                        <th>Route</th>
+                        <th>Capacity</th>
+                        <th>Book</th>
+
+                    </tr>
+                </thead>
+                <tbody>
+                    <%-include('partials/_drivercard.ejs')%>
+                </tbody>
+            </table>
+        </form>
+    </div>
+</main>
+<!-- /Main Site -->
+
+
+<!-- include footer -->
+<%-include('partials/_footer.ejs')%>
+<!-- /include footer -->

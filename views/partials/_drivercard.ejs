@@ -1,0 +1,18 @@
+<% for(var i = 0; i < drivers.length; i++) { %>
+    <tr>
+        <td><%= drivers[i].name %></td>
+        <td><%= drivers[i].email %></td>
+        <td><%= drivers[i].number %></td>
+        <td><%= drivers[i].tname %></td>
+        <td><%= drivers[i].age %></td>
+        <td><%= drivers[i].route %></td>
+        <td><%= drivers[i].capacity %></td>
+
+
+        <td>
+            <a href="/" class="btn border-shadow update">
+                <span class="text-gradient"><i class="fa-solid fa-truck"></i></span>
+            </a>
+        </td>
+    </tr>
+    <% } %>

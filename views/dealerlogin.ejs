@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login</title>
+</head>
+<body>
+    
+    <h2>Login</h2>
+
+    <form action="/dealer/login" method="POST" id="login">
+        <div class="new_user">
+
+            <div class="form-group">
+                <label for="Email" class="text-light">Email</label>
+                <input type="text" id="email" name="email" value="" placeholder="example@gmail.com">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="Possword" class="text-light">Password</label>
+                <input type="password" id="password" name="password" value="" placeholder="Enter your password">
+            </div>
+            
+            <br/>
+    
+            <div class="form-group">
+                <button type="submit" class="btn text-dark update">Login</button>
+            </div>
+    
+        </div>
+    </form>
+</body>
+</html>

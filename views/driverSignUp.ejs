@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Driver Sign Up</title>
+</head>
+<body>
+    <h1>Create a new Account as a Driver</h1>
+
+    <form action="/driver/signUp" method="POST" >
+        <div class="new_user">
+            <div class="form-group">
+                <label for="name" class="text-light">Name</label>
+                <input type="hidden" name="id" value="">
+                <input type="text" name="name" value="" placeholder="Mark Stoenis">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="Email" class="text-light">Email</label>
+                <input type="text" name="email" value="" placeholder="example@gmail.com">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="Possword" class="text-light">Password</label>
+                <input type="password" name="password" value="" placeholder="Enter your password">
+            </div>
+            
+            <br/>
+
+            <div class="form-group">
+                <label for="Number" class="text-light">Mobile Number</label>
+                <input type="text" name="number" value="" placeholder="9999999999">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="tname" class="text-light">Transport Name</label>
+                <input type="text" name="tname" value="" placeholder="Panwar Truck Service">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="Tnumber" class="text-light">Truck Number</label>
+                <input type="text" name="tnumber" value="" placeholder="RJ-10 -0000">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="Age" class="text-light">Age</label>
+                <input type="text" name="age" value="" placeholder="28">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="Experience" class="text-light">Driving Experience</label>
+                <input type="text" name="experience" value="" placeholder="12 years">
+            </div>
+            <br/>
+
+            <div class="form-group">
+                <label for="Capacity" class="text-light">Truck Capacity</label>
+                <input type="text" name="capacity" value="" placeholder="1000kg">
+            </div>
+            <br/>
+            <div class="form-group">
+                <label for="route" class="text-light">Route</label>
+                <input type="text" name="route" value="" placeholder="Delhi">
+            </div>
+            <br/>
+    
+            <div class="form-group">
+                <button type="submit" class="btn text-dark update">Save</button>
+            </div>
+    
+        </div>
+    </form>
+
+</br>
+</br>
+    <a href="/driver/login" >
+        Login 
+    </a>
+</body>
+</html>

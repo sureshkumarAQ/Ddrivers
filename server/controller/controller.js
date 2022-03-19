@@ -171,15 +171,9 @@ exports.bookDriver = async(req,res)=>{
             return;
         }
     
-        await Dealerdb.findByIdAndUpdate(dealerID, {bookedDriverEmail: driverEmail},async (err, dealer) =>{
-            if (err){
-                console.log(err)
-            }
-            else{
-                console.log("Driver booked Successfully ");
-                res.status(200).send(dealer);
-            }
-        });
+        const updatedDriver = await Driverdb.findOneAndUpdate({email:driverEmail}, {dealers: dealerID});
+
+        res.status(200).send(updatedDriver);
 
         
     } catch (error) {

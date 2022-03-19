@@ -59,7 +59,7 @@ var schema = new mongoose.Schema({
         required:true,
     },
     
-   
+    dealers: { type: Schema.Types.ObjectId, ref: 'dealerdb' }
    
 }
 );

@@ -1,4 +1,5 @@
 var Driverdb = require('../model/drivermodel');
+var Dealerdb = require('../model/model');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -102,7 +103,7 @@ exports.driverLogout = async(req,res)=>{
     }
 
 }
-//retrieve and return all drivers/retrive and return a single driver
+//retrieve and return all drivers whose route is same as loged in Dealer
 exports.find = async(req,res)=>{
 
     if(req.query.id)
@@ -125,8 +126,33 @@ exports.find = async(req,res)=>{
             });
     }
     else{
-       await Driverdb.find().select('-password -dealers -__v').then(driver=>{
-            res.send(driver)
+
+        const dealerID = req.dealer._id;//Loged In dealer ID
+
+        if(!dealerID)
+        {
+            res.status(500).send("Please login")
+        }
+
+        const LogedInDealer = await Dealerdb.findById(dealerID);
+
+        // console.log(dealerID)
+        // console.log(LogedInDealer)
+
+        const dealerCity = LogedInDealer.city;
+
+        // console.log(dealerCity)
+
+
+
+
+       await Driverdb.find({route:dealerCity}).select('-password -dealers -__v').then(driver=>{
+           if(!driver[0])
+           {
+               res.status(200).send("No driver available in your city")
+           }
+           else
+            res.status(200).send(driver)
         })
         .catch(err=>{
             res.status(500).send({

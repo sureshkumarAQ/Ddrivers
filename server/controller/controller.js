@@ -85,8 +85,8 @@ exports.loginDealer = async (req,res)=>{
            httpOnly:true
        })
 
-        // res.send({token,number:dealer.number,email:dealer.email});
-        res.redirect('/drivers');
+        res.send({token,number:dealer.number,email:dealer.email});
+        // res.redirect('/driver');
         
     } catch (err) {
         res.status(500).send("Error while Login")
@@ -205,6 +205,7 @@ exports.dealerLogout = async(req,res)=>{
     
     try {
         res.clearCookie('jwtoken')
+        // res.status(200).send("Log out Successufully!")
         res.redirect('/dealer/login')
     } catch (error) {
         res.status(500).send(error)

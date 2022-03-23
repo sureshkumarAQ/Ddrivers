@@ -95,7 +95,7 @@ exports.loginDealer = async (req,res)=>{
 
 
 
-//retrieve and return all dealers/retrive and return a single dealer
+//retrieve and return all dealers who booked the current login driver
 exports.find = async(req,res)=>{
 
     if(req.query.id)
@@ -125,7 +125,7 @@ exports.find = async(req,res)=>{
             return;
         }
     
-        const driver  = await Driverdb.findById(driverID);
+        const driver  = await Driverdb.findById(driverID).populate('dealers',['name', 'email', 'number', 'material', 'weight', 'quantity', 'city', 'state']);
         
 
         if(!driver)
@@ -134,9 +134,15 @@ exports.find = async(req,res)=>{
             return;
         }
     
-       await Dealerdb.find({bookedDriverEmail:driver.email}).then(dealer=>{
-            res.send(dealer)
-        })
+        if(driver.dealers.length===0)
+        {
+            res.status(200).send("No Dealer booked your service yet")
+        }
+        else
+           res.status(200).send(driver.dealers)
+    //    await Dealerdb.find().then(dealer=>{
+    //         res.send(dealer)
+    //     })
         .catch(err=>{
             res.status(500).send({
                 message:err.message||"Some error occurred while creating a create operation"
@@ -162,7 +168,9 @@ exports.bookDriver = async(req,res)=>{
             return;
         }
     
-        const driver  = await Driverdb.find({email:driverEmail});
+        const driver  = await Driverdb.find({email:driverEmail})
+
+
         
 
         if(!driver)
@@ -170,16 +178,22 @@ exports.bookDriver = async(req,res)=>{
             res.status(400).send({message:"Driver not exist"});
             return;
         }
-    
-        const updatedDriver = await Driverdb.findOneAndUpdate({email:driverEmail}, {dealers: dealerID});
-
-        res.status(200).send(updatedDriver);
+        
+         await Driverdb.findOneAndUpdate(
+            {
+                email:driverEmail
+            }, 
+            { $push: { dealers: dealerID } },
+            { upsert: true }
+        ).exec();
+        
+        res.status(200).send(driver);
 
         
     } catch (error) {
-        res.status(500).send({
-                message:err.message||"Some error occurred while creating a create operation"
-        });
+        res.status(500).send(
+                "Some error occurred while booking a new driver"
+        );
     }
 
     

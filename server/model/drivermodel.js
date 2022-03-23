@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const Dealerdb = require('../model/model.js');
+const dealerdb = require('../model/model.js');
 const Schema = mongoose.Schema;
 const validator = require("validator");
 const bcrypt = require("bcrypt");
@@ -59,7 +59,7 @@ var schema = new mongoose.Schema({
         required:true,
     },
     
-    dealers: { type: Schema.Types.ObjectId, ref: 'dealerdb' }
+    dealers: [{ type: Schema.Types.ObjectId, ref: 'dealerdb' }]
    
 }
 );

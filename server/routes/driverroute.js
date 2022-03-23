@@ -22,7 +22,7 @@ route.post('/driver/login',drivercontroller.loginDriver);
 
 route.get('/driver/logout',drivercontroller.driverLogout)
 
-route.get('/driver',drivercontroller.find);
+route.get('/driver',dealerauth,drivercontroller.find);
 
 // Delete driver
 route.delete('/driver/delete',drivercontroller.deleteDriver);

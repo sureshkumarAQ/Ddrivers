@@ -83,8 +83,8 @@ exports.loginDriver = async (req,res)=>{
         httpOnly:true
         })
 
-        // res.send({token,number:driver.number,email:driver.email});
-        res.redirect('/bookedDealers');
+        res.send({token,number:driver.number,email:driver.email});
+        // res.redirect('/bookedDealers');
         
     } catch (err) {
         res.status(500).send({err:error.message||"Error while Login"})
@@ -125,7 +125,7 @@ exports.find = async(req,res)=>{
             });
     }
     else{
-       await Driverdb.find().then(driver=>{
+       await Driverdb.find().select('-password -dealers -__v').then(driver=>{
             res.send(driver)
         })
         .catch(err=>{

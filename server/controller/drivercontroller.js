@@ -84,8 +84,8 @@ exports.loginDriver = async (req,res)=>{
         httpOnly:true
         })
 
-        res.send({token,number:driver.number,email:driver.email});
-        // res.redirect('/bookedDealers');
+        // res.send({token,number:driver.number,email:driver.email});
+        res.redirect('/dealer');
         
     } catch (err) {
         res.status(500).send({err:error.message||"Error while Login"})

@@ -20,10 +20,13 @@ route.post('/driver/signUp',drivercontroller.registerDriver);
 // Login driver
 route.post('/driver/login',drivercontroller.loginDriver);
 
-route.get('/driver/logout',drivercontroller.driverLogout)
-
+// Get a list of all drivers whose route is same as current login dealer route (Dealer login required)
 route.get('/driver',dealerauth,drivercontroller.find);
 
+// Get list of all available drivers and search by city and state (No login required)
+route.get('/alldrivers/:location',drivercontroller.searchDriver);
+
+route.get('/driver/logout',drivercontroller.driverLogout)
 // Delete driver
 route.delete('/driver/delete',drivercontroller.deleteDriver);
 

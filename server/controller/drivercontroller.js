@@ -162,6 +162,28 @@ exports.find = async(req,res)=>{
     }
 }
 
+// Search driver by his routes without login
+exports.searchDriver = async(req,res)=>{
+
+    try {
+        const location = req.params.location;
+
+        const drivers = await Driverdb.find(
+            {
+                '$or':[
+                    {'route':{$regex:location}}
+                ]
+            }
+        ).select('-password -dealers -__v')
+        console.log(location);
+
+        res.status(200).send(drivers);
+    } catch (err) {
+        res.status(500).send({err:error.message||"Error while Searching"})
+    }
+
+    
+}
 
 // Delete Driver
 exports.deleteDriver = async(req,res)=>{

@@ -85,7 +85,7 @@ exports.loginDealer = async (req,res)=>{
            httpOnly:true
        })
 
-        // res.send({token,number:dealer.number,email:dealer.email});
+        /**res.send({token,number:dealer.number,email:dealer.email});**/
         res.redirect('/driver');
         
     } catch (err) {
@@ -98,57 +98,58 @@ exports.loginDealer = async (req,res)=>{
 //retrieve and return all dealers who booked the current login driver
 exports.find = async(req,res)=>{
 
-    if(req.query.id)
-    {
-        const id  = req.query.id;
+    try {
+            if(req.query.id)
+            {
+                const id  = req.query.id;
 
-        await Dealerdb.findById(id)
-            .then(data=>{
-                if(!data){
-                    res.status(404).send({message:"Not found user with id "+id})
+                await Dealerdb.findById(id)
+                    .then(data=>{
+                        if(!data){
+                            res.status(404).send({message:"Not found user with id "+id})
+                        }
+                        else{
+                            res.send(data);
+                        }
+                    })
+                    .catch(err=>{
+                        res.status(500).send({
+                            message:err.message||"Some error occurred while creating a create operation"
+                        });
+                    });
+            }
+            else{
+            const driverID = req.driver._id;
+            if(!driverID)
+                {
+                    res.status(400).send({message:"Please Login"});
+                    return;
                 }
-                else{
-                    res.send(data);
-                }
-            })
-            .catch(err=>{
-                res.status(500).send({
-                    message:err.message||"Some error occurred while creating a create operation"
-                });
-            });
-    }
-    else{
-       const driverID = req.driver._id;
-       if(!driverID)
-        {
-            res.status(400).send({message:"Please Login"});
-            return;
-        }
-    
-        const driver  = await Driverdb.findById(driverID).populate('dealers',['name', 'email', 'number', 'material', 'weight', 'quantity', 'city', 'state']);
-        
+            
+                const driver  = await Driverdb.findById(driverID).populate('dealers',['name', 'email', 'number', 'material', 'weight', 'quantity', 'city', 'state']);
+                
 
-        if(!driver)
-        {
-            res.status(400).send({message:"Driver not exist"});
-            return;
-        }
-    
-        if(driver.dealers.length===0)
-        {
-            res.status(200).send("No Dealer booked your service yet")
-        }
-        else
-           res.status(200).send(driver.dealers)
-    //    await Dealerdb.find().then(dealer=>{
-    //         res.send(dealer)
-    //     })
-        .catch(err=>{
+                if(!driver)
+                {
+                    res.status(400).send({message:"Driver not exist"});
+                    return;
+                }
+            
+                if(driver.dealers.length===0)
+                {
+                    res.status(200).send("No Dealer booked your service yet")
+                }
+                else
+                res.status(200).send(driver.dealers)
+
+            }
+    } catch (err) {
             res.status(500).send({
                 message:err.message||"Some error occurred while creating a create operation"
-            });
-        });
+            })
     }
+
+    
 }
 
 exports.bookDriver = async(req,res)=>{

@@ -6,11 +6,6 @@ exports.homeRoute = (req,res)=>{
     res.render('index.ejs');
 }
 
-const authAxios = {
-    Headers:{
-        Cookie:` jwtoken=${config.JWT_SECRET}`,
-    },
-};
 
 exports.driverList = (req,res)=>{
 
@@ -27,9 +22,7 @@ exports.driverList = (req,res)=>{
 
 exports.bookedDealer = (req,res)=>{
     // Make a get request to dealer 
-    axios.get('http://localhost:3000/dealer',
-    
-    authAxios)
+    axios.get('http://localhost:3000/dealer')
     .then(function(response){
         // console.log(response.data);
         res.render('bookedDealer.ejs',{dealers:response.data})
@@ -38,6 +31,17 @@ exports.bookedDealer = (req,res)=>{
         res.send(err);
     })
     // res.render('bookedDealer.ejs')
+}
+
+exports.alldriverList = (req,res)=>{
+    axios.get('http://localhost:3000/alldrivers')
+    .then(function(response){
+        // console.log(response.data);
+        res.render('drivers.ejs',{drivers:response.data})
+    })
+    .catch(err=>{
+        res.send(err);
+    })
 }
 
 exports.driverSignUp = (req,res)=>{

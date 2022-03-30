@@ -17,7 +17,6 @@ route.get('/drivers', dealerauth,services.driverList);
 
 
 
-
 //APIs
 
 // Register a new dealer

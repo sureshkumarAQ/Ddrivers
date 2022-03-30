@@ -13,6 +13,8 @@ route.get('/driver/signUp',services.driverSignUp);
 
 route.get('/driver/login',services.driverLogin);
 
+route.get('/AvailableDrivers',services.alldriverList);
+
 // API
 // Register a new driver
 route.post('/driver/signUp',drivercontroller.registerDriver);
@@ -25,6 +27,8 @@ route.get('/driver',dealerauth,drivercontroller.find);
 
 // Get list of all available drivers and search by city and state (No login required)
 route.get('/alldrivers/:location',drivercontroller.searchDriver);
+
+route.get('/alldrivers',drivercontroller.AllDriver);
 
 route.get('/driver/logout',drivercontroller.driverLogout)
 // Delete driver

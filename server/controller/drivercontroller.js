@@ -92,7 +92,6 @@ exports.loginDriver = async (req,res)=>{
     }
 }
 
-
 exports.driverLogout = async(req,res)=>{
     
     try {
@@ -168,13 +167,18 @@ exports.searchDriver = async(req,res)=>{
     try {
         const location = req.params.location;
 
+        if(!location)
+        {
+            
+        }
+
         const drivers = await Driverdb.find(
             {
                 '$or':[
                     {'route':{$regex:location}}
                 ]
             }
-        ).select('-password -dealers -__v')
+        ).select('-password -dealers -__v -_id')
         console.log(location);
 
         res.status(200).send(drivers);
@@ -183,6 +187,18 @@ exports.searchDriver = async(req,res)=>{
     }
 
     
+}
+
+//Get all drivers
+exports.AllDriver = async(req,res)=>{
+    try {
+        const drivers = await Driverdb.find().select('-password -dealers -__v -_id')
+
+        res.status(200).send(drivers);
+    } catch (err) {
+        res.status(500).send({err:error.message||"Error while Fetching all drivers"})
+    }
+
 }
 
 // Delete Driver

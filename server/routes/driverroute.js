@@ -31,11 +31,10 @@ route.get('/alldrivers/:location',drivercontroller.searchDriver);
 route.get('/alldrivers',drivercontroller.AllDriver);
 
 route.get('/driver/logout',drivercontroller.driverLogout)
+
+route.post('/driver/:id',dealerauth,drivercontroller.postReview)
+route.get('/driver/:id',dealerauth,drivercontroller.driverProfile)
 // Delete driver
 route.delete('/driver/delete',drivercontroller.deleteDriver);
-
-
-//API
-// route.post('/api/drivers',drivercontroller.create);
 
 module.exports = route;

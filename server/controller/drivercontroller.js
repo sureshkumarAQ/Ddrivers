@@ -1,5 +1,6 @@
 var Driverdb = require('../model/drivermodel');
 var Dealerdb = require('../model/model');
+var Review = require('../model/review');
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 
@@ -167,11 +168,6 @@ exports.searchDriver = async(req,res)=>{
     try {
         const location = req.params.location;
 
-        if(!location)
-        {
-            
-        }
-
         const drivers = await Driverdb.find(
             {
                 '$or':[
@@ -199,6 +195,69 @@ exports.AllDriver = async(req,res)=>{
         res.status(500).send({err:error.message||"Error while Fetching all drivers"})
     }
 
+}
+
+// Driver for driver 
+exports.postReview = async(req,res)=>{
+    try {
+        const driverID = req.params.id;
+        const dealerID = req.dealer._id;//Loged In dealer ID
+            //Validate request
+        if(!req.body)
+        {
+            res.status(400).send({message:"Content can not be empty"});
+            return;
+        }
+        
+         // Store all data 
+        const review =  new Review({
+            text:req.body.text,
+            postedBy:dealerID,
+            postedFor:driverID
+        })
+
+
+
+        await review.save(review).then(data=>{
+            console.log(review)
+            res.status(201).send(review)
+        })
+        .catch(err=>{
+            res.status(500).send({
+                message:err.message||"Some error occurred while creating a a new review"
+            });
+        });
+
+    } catch (err) {
+        res.status(500).send({err:error.message||"Error while Fetching drivers"})
+    }
+
+}
+
+// Driver Profile
+exports.driverProfile = async(req,res)=>{
+    try {
+        const driverID = req.params.id;
+        
+        const driver = await Driverdb.findById(driverID).select('-password -dealers -__v -_id');
+
+        if(!driver)
+        {
+            res.status(500).send("No driver exist with this Id")
+        }
+
+        const reviews = await Review.find({postedFor:driverID}).select('-_id -__v').populate('postedBy',['name', 'city']);
+
+        if(!reviews[0])
+        {
+            res.status(500).send("No review posted for this driver")
+        }
+
+        res.status(200).send(reviews)
+
+    } catch (err) {
+        res.status(500).send({err:error.message||"Error while Fetching drivers"})
+    }
 }
 
 // Delete Driver

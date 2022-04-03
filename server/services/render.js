@@ -5,8 +5,6 @@ const config = process.env;
 exports.homeRoute = (req,res)=>{
     res.render('index.ejs');
 }
-
-
 exports.driverList = (req,res)=>{
 
     // Make a get request to driver 

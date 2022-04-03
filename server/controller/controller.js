@@ -93,8 +93,6 @@ exports.loginDealer = async (req,res)=>{
     }
 }
 
-
-
 //retrieve and return all dealers who booked the current login driver
 exports.find = async(req,res)=>{
 
@@ -200,7 +198,6 @@ exports.bookDriver = async(req,res)=>{
     
 
 }
-
 
 exports.dealerLogout = async(req,res)=>{
     
